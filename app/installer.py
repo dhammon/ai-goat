@@ -67,6 +67,7 @@ class Installer:
                             print("    > ", output.strip())
                         break
                 process.stdout.close()
+            print(err)
             if "permission denied" in err:
                 process.stdout.close()
                 print("[!] Docker image pull failed! Check user permissions (add to docker group)")
