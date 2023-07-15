@@ -60,14 +60,14 @@ class Installer:
                 while True:
                     output = process.stdout.readline()
                     print("    > ", output.strip())
-                    if "permission denied" in output.strip():
-                        process.stdout.close()
-                        print("[!] Docker image pull failed! Check user permissions (add to docker group)")
-                        exit()
                     return_code = process.poll()
                     if return_code is not None:
                         for output in process.stdout.readlines():
                             print("    > ", output.strip())
+                            if "permission denied" in output.strip():
+                                process.stdout.close()
+                                print("[!] Docker image pull failed! Check user permissions (add to docker group)")
+                                exit()
                         break
                 process.stdout.close()
             print("[+] Docker images pulled!")
