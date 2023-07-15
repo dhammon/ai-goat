@@ -1,0 +1,23 @@
+version: '1'
+
+services:
+  ctfd:
+    image: rootcauz/ai-ctfd:${AI_CTFD_VERSION}
+    ports:
+      - "8000:8000"
+      
+  #Prompt Injection
+  challenge1: 
+    container_name: challenge1
+    image: rootcauz/ai-base:${AI_BASE_VERSION}
+    entrypoint: python3 app.py
+    ports:
+      - "9001:9001"
+    volumes:
+      - ./app/models:/models
+      - ./app/challenges/1.py:/app.py
+
+networks:
+  default:
+  internal:
+    internal: true
