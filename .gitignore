@@ -1,0 +1,7 @@
+NOTES.md
+app/models/*
+app/__pycache__
+.dccache
+.vscode
+__pycache__
+CTFd
