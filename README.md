@@ -45,7 +45,10 @@ An optional CTFd container has been prepared that includes each challenge descri
 # Installation
 ## Requirements
 - git
+  - `sudo apt install git -y`
 - python3
+- pip3
+  - `sudo apt install python3-pip -y`
 - [Docker](https://docs.docker.com/engine/install/ubuntu/)
 - [docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04)
 - 8GBs of drive space
