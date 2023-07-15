@@ -51,7 +51,11 @@ An optional CTFd container has been prepared that includes each challenge descri
   - `sudo apt install python3-pip -y`
 - [Docker](https://docs.docker.com/engine/install/ubuntu/)
 - [docker-compose](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04)
+- User in docker group
+  - `sudo usermod -aG docker $USER`
+  - `reboot`
 - 8GBs of drive space
+- Minimum 16GB system memory with at least 8GB dedicated to the challenge; otherwise LLM responses take too long
 - A love for cybersecurity!
 
 ## Directions
