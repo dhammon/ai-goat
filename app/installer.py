@@ -56,7 +56,8 @@ class Installer:
     def pull_docker_images():
         try:
             for image in Config.AI_IMAGES:
-                process = subprocess.Popen(['docker', 'pull', image], stdout=subprocess.PIPE, universal_newlines=True)
+                process = subprocess.Popen(['docker', 'pull', image], stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+                out, err = process.communicate()
                 while True:
                     output = process.stdout.readline()
                     print("    > ", output.strip())
@@ -64,12 +65,12 @@ class Installer:
                     if return_code is not None:
                         for output in process.stdout.readlines():
                             print("    > ", output.strip())
-                            if "permission denied" in output.strip():
-                                process.stdout.close()
-                                print("[!] Docker image pull failed! Check user permissions (add to docker group)")
-                                exit()
                         break
                 process.stdout.close()
+            if "permission denied" in err:
+                process.stdout.close()
+                print("[!] Docker image pull failed! Check user permissions (add to docker group)")
+                exit()
             print("[+] Docker images pulled!")
             return True
         except:
