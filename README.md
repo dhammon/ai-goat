@@ -9,7 +9,7 @@
     ______________________________________
 
     Presented by: rootcauz
-```
+```****
 
 Learn AI security through a series of vulnerable LLM CTF challenges.  No sign ups, no cloud fees, run everything locally on your system.
 
@@ -112,7 +112,7 @@ Successful prompt injection attacks influence the LLM to respond with informatio
 ```
 ./ai-goat.py -r 1
 ```
-
+[LLM01: Prompt Injections](#LLM01) | [LLM07: Data Leakage](#LLM07)
 
 
 # Versioning
