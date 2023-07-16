@@ -112,7 +112,7 @@ Successful prompt injection attacks influence the LLM to respond with informatio
 ```
 ./ai-goat.py -r 1
 ```
-
+[LLM01: Prompt Injections](#LLM01) | [LLM07: Data Leakage](#LLM07)
 
 
 # Versioning

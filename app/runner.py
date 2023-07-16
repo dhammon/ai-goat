@@ -41,7 +41,7 @@ class Runner:
         sad_msg = "[-] CTFd startup failed!"
         Runner.run(os_command, happy_msg, sad_msg)
     
-
+    #Basic Prompt Injection
     def challenge_1():
         print("[!] Starting Challenge 1!")
         Runner.restart_container("challenge1")

@@ -6,7 +6,7 @@ services:
     ports:
       - "8000:8000"
       
-  #Prompt Injection
+  #Basic Prompt Injection
   challenge1: 
     container_name: challenge1
     image: rootcauz/ai-base:${AI_BASE_VERSION}
@@ -15,7 +15,7 @@ services:
       - "9001:9001"
     volumes:
       - ./app/models:/models
-      - ./app/challenges/1.py:/app.py
+      - ./app/challenges/1/app.py:/app.py
 
 networks:
   default:
