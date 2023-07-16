@@ -9,7 +9,7 @@
     ______________________________________
 
     Presented by: rootcauz
-```****
+```
 
 Learn AI security through a series of vulnerable LLM CTF challenges.  No sign ups, no cloud fees, run everything locally on your system.
 
