@@ -42,4 +42,7 @@ def run(inputs):
         if args.run == '1':
             Runner.challenge_1()
             exit()
+        if args.run == '2':
+            Runner.challenge_2()
+            exit()
     handle_args(["--help"])
