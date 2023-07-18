@@ -43,6 +43,7 @@ class Runner:
     
 
     def check_llm_status(container_name, happy_msg, sad_msg):
+        subprocess.run(["docker", "exec", container_name, "touch", "/challenge/log.txt"])
         print("[!] Waiting for LLM to load, this may take a few minutes...")
         try:
             test = False
