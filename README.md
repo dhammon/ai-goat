@@ -114,6 +114,12 @@ Successful prompt injection attacks influence the LLM to respond with informatio
 ```
 [LLM01: Prompt Injections](#LLM01) | [LLM07: Data Leakage](#LLM07)
 
+## Challenge 2 - Title Requestor
+LLM system output shouldn't be trusted, especially when that output is used in downstream operations such as OS commands or network calls.  This challenge has another AI chatbot running on port 9002 that takes a user question and returns a website's title.  The user input is converted into a URL by the chatbot where it is used to request that site's source while ripping the the title.  What else could this chatbot have network access to?
+```
+./ai-goat.py -r 2
+```
+[LLM02: Insecure Output Handling](#LLM02)
 
 # Versioning
 Latest version is main branch.  You can find the version in the `CHANGELOG.md` file.  Branches are created for each respective version.

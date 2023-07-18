@@ -1,6 +1,3 @@
-from llama_cpp import Llama
-import socket
-import threading
 
 def app(conn, i, llm):
     while True:
@@ -29,34 +26,3 @@ def app(conn, i, llm):
         except:
             conn.send(bytes(" [bot] No flag for you! \n", 'utf-8'))
         i = i + 1
-
-
-def load_llm():
-    log = open("log.txt", "w")
-    log.write("")
-    log.close()
-    print("Loading LLM...")
-    llm = Llama(model_path="../models/ggml-old-vic13b-q4_0.bin", n_ctx=2048)
-    log = open("log.txt", "a")
-    log.write("LLM loaded!")
-    log.close()
-    return llm
-
-
-def start_server(llm):
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.bind(('0.0.0.0', 9001))
-    server.listen(1)
-    while True:
-        i = 0
-        conn, addr = server.accept()
-        print('Connected by', addr)
-        proc = threading.Thread(target=app, args=(conn, i, llm))
-        proc.start()
-
-
-llm = load_llm()
-start_server(llm)
-
-
-

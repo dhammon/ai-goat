@@ -10,12 +10,28 @@ services:
   challenge1: 
     container_name: challenge1
     image: rootcauz/ai-base:${AI_BASE_VERSION}
-    entrypoint: python3 app.py
+    entrypoint: /usr/bin/bash /challenge/entrypoint.sh
     ports:
       - "9001:9001"
     volumes:
-      - ./app/models:/models
-      - ./app/challenges/1/app.py:/app.py
+      - ./app/challenges/1/entrypoint.sh:/challenge/entrypoint.sh
+      - ./app/challenges/1/app.py:/challenge/app.py
+      - ./app/models:/challenge/models
+      - ./app/challenges/core.py:/challenge/core.py
+
+  #Title Requestor
+  challenge2:
+    container_name: challenge2
+    image: rootcauz/ai-base:${AI_BASE_VERSION}
+    entrypoint: /usr/bin/bash /challenge/entrypoint.sh
+    ports:
+      - "9002:9002"
+    volumes:
+      - ./app/challenges/2/entrypoint.sh:/challenge/entrypoint.sh
+      - ./app/challenges/2/app.py:/challenge/app.py
+      - ./app/models:/challenge/models
+      - ./app/challenges/core.py:/challenge/core.py
+
 
 networks:
   default:

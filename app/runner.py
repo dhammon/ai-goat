@@ -41,25 +41,52 @@ class Runner:
         sad_msg = "[-] CTFd startup failed!"
         Runner.run(os_command, happy_msg, sad_msg)
     
-    #Basic Prompt Injection
-    def challenge_1():
-        print("[!] Starting Challenge 1!")
-        Runner.restart_container("challenge1")
-        os_command = ['docker', 'compose', 'up', 'challenge1', '-d']
-        happy_msg = "[!] Challenge 1 pending..."
-        sad_msg = "[-] Challenge 1 startup failed!"
-        Runner.run(os_command, happy_msg, sad_msg)
+
+    def check_llm_status(container_name, happy_msg, sad_msg):
         print("[!] Waiting for LLM to load, this may take a few minutes...")
         try:
             test = False
             while test == False:
-                result = subprocess.run(["docker", "exec", "challenge1", "cat", "log.txt" ], capture_output=True, text=True)
+                result = subprocess.run(["docker", "exec", container_name, "cat", "/challenge/log.txt" ], capture_output=True, text=True)
+                if result.returncode > 0:
+                    print("[-] Docker launch failed!", result)
+                    exit()
                 if "LLM loaded!" in result.stdout:
                     print("[+] LLM Loaded!")
-                    print("[+] Netcat to port 9001 to start the challenge.  Good luck!")
+                    print(happy_msg)
                     test = True
                 else:
                     sleep(5)
         except Exception as e:
             print(sad_msg, e)
             exit()
+    
+    #TODO kill other containers when launching a new container
+    #TODO starter()  
+
+    #Basic Prompt Injection
+    def challenge_1():
+        container_name = "challenge1"
+        print("[+] Starting Challenge 1!")
+        os_command = ['docker', 'compose', 'up', container_name, '-d']
+        run_happy_msg = "[!] Challenge 1 pending..."
+        run_sad_msg = "[-] Challenge 1 startup failed!"
+        llm_happy_msg = "[+] Netcat to port 9001 to start the challenge.  Good luck!"
+        llm_sad_msg = run_sad_msg
+        Runner.restart_container(container_name)
+        Runner.run(os_command, run_happy_msg, run_sad_msg)
+        Runner.check_llm_status(container_name, llm_happy_msg, llm_sad_msg)
+
+
+    #Title Requestor
+    def challenge_2():
+        container_name = "challenge2"
+        print("[+] Starting Challenge 2!")
+        os_command = ['docker', 'compose', 'up', container_name, '-d']
+        run_happy_msg = "[!] Challenge 2 pending..."
+        run_sad_msg = "[-] Challenge 2 startup failed!"
+        llm_happy_msg = "[+] Netcat to port 9002 to start the challenge.  Good luck!"
+        llm_sad_msg = run_sad_msg
+        Runner.restart_container(container_name)
+        Runner.run(os_command, run_happy_msg, run_sad_msg)
+        Runner.check_llm_status(container_name, llm_happy_msg, llm_sad_msg)
