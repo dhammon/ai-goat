@@ -1,4 +1,9 @@
 
+August 21st, 2024
+Version 0.1.1
+- Updated README with instructions to change Flags
+- Added MD5 checksum on LLM (thanks hu-guanwei!)
+
 July 17th, 2023
 Version 0.1.0
 - Improved challenge structure

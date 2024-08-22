@@ -1,2 +1,2 @@
-requests==2.22.0
+requests==2.32.2
 tqdm==4.64.1

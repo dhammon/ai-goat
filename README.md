@@ -77,6 +77,16 @@ Using ai-ctfd provides you with a listing of all the challenges and flag submiss
 ```
 > Important: Once launched, you must create a user registering a user account.  This registration stays local on the container and does not require a real email address.
 
+### Step 1.1 - Change the Flags
+You can change the flags within the challenges source code and then in CTFD (they must match).
+
+1. After you clone the repo, navigate to `ai-goat/app/challenges/1/app.py` and change the flag in the string on line 12.
+2. Then navigate to `ai-goat/app/challenges/2/entrypoint.sh` and change the flag on line 3.
+3. Next you will need to change the flags in CTFD. Launch CTFD (`./ai-goat.py --run ctfd` and open browser to `http://127.0.0.1:8000`) and then login with the `root` user using `qVLv27Dsy5WuXRubjfII` as the password.
+4. Once logged in, navigate the admin panel (top nav bar) -> Challenges (top nav bar) -> select a challenge -> and hit the Flags sub-tab.
+5. Change the flag for each CTFD challenge to match the same string you changed the in the source code.
+
+Have fun!
 
 ## Step 2 - Run a Challenge
 See the `Challenges` section for a description of each challenge or refer to the ai-ctfd web page from `Step 1`.  The following command launches the first challenge:
