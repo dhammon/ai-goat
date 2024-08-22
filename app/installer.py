@@ -10,7 +10,14 @@ from tqdm.auto import tqdm
 from os.path import isfile
 from sys import exit
 from app.config import Config
+import hashlib
 
+def calculate_md5(filename):
+    hash_md5 = hashlib.md5()
+    with open(filename, "rb") as f:
+        for chunk in iter(lambda: f.read(4096), b""):
+            hash_md5.update(chunk)
+    return hash_md5.hexdigest()
 
 class Installer:
 
@@ -28,7 +35,11 @@ class Installer:
     def check_model():
         if isfile(Config.MODEL_PATH):
             print("[+] Model found!")
-            return True
+            if calculate_md5(Config.MODEL_PATH) == Config.MODEL_MD5:
+                return True
+            else:
+                print(f"[-] Check model file integrity! Expect md5sum={Config.MODEL_MD5}.")
+                return False
         else:
             print("[-] Model missing!")
             return False
