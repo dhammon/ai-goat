@@ -12,12 +12,6 @@ from sys import exit
 from app.config import Config
 import hashlib
 
-def calculate_md5(filename):
-    hash_md5 = hashlib.md5()
-    with open(filename, "rb") as f:
-        for chunk in iter(lambda: f.read(4096), b""):
-            hash_md5.update(chunk)
-    return hash_md5.hexdigest()
 
 class Installer:
 
@@ -35,14 +29,25 @@ class Installer:
     def check_model():
         if isfile(Config.MODEL_PATH):
             print("[+] Model found!")
-            if calculate_md5(Config.MODEL_PATH) == Config.MODEL_MD5:
+            print("[!] Checking integrity, please allow 300 seconds...")
+            if Installer.calculate_md5(Config.MODEL_PATH) == Config.MODEL_MD5:
+                print("[+] Model integrity check pass!")
                 return True
             else:
-                print(f"[-] Check model file integrity! Expect md5sum={Config.MODEL_MD5}.")
-                return False
+                print(f"[-] Check model file integrity! Expect md5sum={Config.MODEL_MD5}. Remove the file at {Config.MODEL_PATH} and try rerun the installer.")
+                exit()
         else:
             print("[-] Model missing!")
             return False
+        
+    
+    def calculate_md5(filename):
+        hash_md5 = hashlib.md5()
+        with open(filename, "rb") as f:
+            for chunk in iter(lambda: f.read(4096), b""):
+                hash_md5.update(chunk)
+        return hash_md5.hexdigest()
+
 
     def download_model():
         try:
